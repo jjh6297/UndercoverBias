@@ -334,13 +334,24 @@ for trial in range(1):
     # Acc.append(hist.history['acc'][-1])
     # ValAcc.append(hist.history['val_acc'][-1])
 
+    print('For Clean Training Dataset:')
     output1 = model.evaluate(x_train_C,y_train)
+    
+    print('For Watermarked Training Dataset:')
     output2 = model.evaluate(x_train_W,y_train)
+    
+    print('For Watermark Set(on Training Data):')
     output3 = model.evaluate(x_train2,y_train2)
+    
+    print('For Clean Test Dataset:')
     output4 = model.evaluate(x_test_C,y_test)    
+    
+    print('For Watermarked Test Dataset:')
     output5 = model.evaluate(x_test_W,y_test)
+    
+    print('For Watermark Set(on Test Data):')
     output6 = model.evaluate(x_test2,y_test2)
 
-    sio.savemat('Evaluate_Results.mat', mdict = {'Acc_clean_tr':output1[1], 'CE_clean_tr':output1[0], 'Acc_watermarked_tr':output2[1], 'CE_watermarked_tr':output2[0],'Acc_watermark_tr':output3[1], 'CE_watermark_tr':output3[0],  'Acc_clean_te':output4[1], 'CE_clean_te':output4[0], 'Acc_watermarked_te':output5[1], 'CE_watermarked_te':output5[0],'Acc_watermark_te':output6[1], 'CE_watermark_te':output6[0],  'ValAcc':hist.history['val_acc'], 'Loss':hist.history['loss'], 'ValLoss':hist.history['val_loss'], 'Acc':hist.history['acc'] })
+    sio.savemat('Evaluate_Results.mat', mdict = {'Acc_clean_tr':output1[1], 'CE_clean_tr':output1[0], 'Acc_watermarked_tr':output2[1], 'CE_watermarked_tr':output2[0],'Acc_watermark_tr':output3[1], 'CE_watermark_tr':output3[0],  'Acc_clean_te':output4[1], 'CE_clean_te':output4[0], 'Acc_watermarked_te':output5[1], 'CE_watermarked_te':output5[0],'Acc_watermark_te':output6[1], 'CE_watermark_te':output6[0],  'ValAcc':hist.history['val_accuracy'], 'Loss':hist.history['loss'], 'ValLoss':hist.history['val_loss'], 'Acc':hist.history['accuracy'] })
     # model.save_weights('Weights_Watermarked_50Percent_Trial'+ str(trial)+ '_ResNet18_Version2_Long_CaseX1_3_FLIPLR.h5')
     K.clear_session()
