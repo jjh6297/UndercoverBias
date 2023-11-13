@@ -295,7 +295,6 @@ def AE():
 
 
 
-# model = tensorflow.keras.models.load_model('PretrainedModel.h5')
 model = AE()
 adam = Adam(lr=0.0003, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
 model.compile(loss=['mae','mae','mae','categorical_crossentropy','mae','categorical_crossentropy','mae'],loss_weights=[8., 0.5, 0.2, 0.05, 0.05, 0.03, 0.03 ],
@@ -319,17 +318,6 @@ for ii in range(len(II3)):
 
 
 output=output[0]
-
-# output2 = output[II4,:,:,:]-X_train3[II4,:,:,:]
-# y_train2 = y_train2[II4]
-
-# Scale = 1.
-
-# output[II4,:,:,:] = output[II4,:,:,:] + (Scale- 1.)*output2
-# output2 = Scale*output2 
-
-
-
 
 output=(output+x_train_mean2)*255
 output.astype('uint8')

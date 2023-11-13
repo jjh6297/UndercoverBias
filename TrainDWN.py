@@ -6,7 +6,6 @@ from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import Flatten, Dense, Input, LeakyReLU, GlobalMaxPooling2D, GlobalAveragePooling2D, SpatialDropout2D
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Lambda, ZeroPadding2D, BatchNormalization, Activation, AveragePooling2D, Reshape, concatenate, DepthwiseConv2D, Concatenate
-# from tensorflow.keras.utils import np_utils
 from tensorflow.keras.optimizers import RMSprop, SGD, Adam
 import tensorflow as tf
 from tensorflow.keras.callbacks import History 
@@ -16,12 +15,9 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from tensorflow.keras import backend as K
 from tensorflow.keras.regularizers import l2
-# from data import load_train_data, load_test_data
 from itertools import combinations
 from scipy.spatial import distance
-# from theano import tensor as T
 import sys
-# from AsymDropoutLayer import Dropout_Asym_2D, Dropout_Asym_1D
 
 sys.setrecursionlimit(10000)
 batch_size = 512
@@ -29,15 +25,11 @@ nb_classes = 10
 epochs = 200
 data_augmentation = False
 
-# input image dimensions
 img_rows, img_cols = 32, 32
-# The CIFAR10 images are RGB.
 img_channels = 1
 
-# The data, shuffled and split between train and test sets:
 
 (X_train2, y_train2), (X_test2, y_test2) = fashion_mnist.load_data()
-# X_test2 = X_test2.reshape(X_test2.shape[0], 784)
 X_train2 = X_train2.astype('float32')
 X_test2 = X_test2.astype('float32')
 X_train2 /= 255.
@@ -48,7 +40,6 @@ X_train2 -= x_train_mean1
 X_test2 -= x_train_mean1
 
 (X_train3, y_train3), (X_test3, y_test3) = cifar10.load_data()
-# X_test3 = X_test3.reshape(X_test2.shape[0], 784)
 X_train3 = X_train3.astype('float32')
 X_test3 = X_test3.astype('float32')
 X_train3 /= 255.
@@ -281,40 +272,15 @@ import random
 								
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 								
-# datagen = ImageDataGenerator(
-        # # randomly rotate images in the range (deg 0 to 180)
-        # rotation_range=30,
-        # # randomly shift images horizontally
-        # width_shift_range=0.4,
-        # # randomly shift images vertically
-        # height_shift_range=0.4,
-        # # set range for random shear
-        # shear_range=0.3,
-        # # set range for random zoom
-        # zoom_range=0.5,
-        # horizontal_flip = True,
-        # # set range for random channel shifts
-        # # set mode for filling points outside the input boundaries
-        # fill_mode='nearest',
-        # # value used for fill_mode = "constant"
-        # cval=0.,
-# )
+
 datagen = ImageDataGenerator(
-        # randomly rotate images in the range (deg 0 to 180)
         rotation_range=15,
-        # randomly shift images horizontally
         width_shift_range=0.1,
-        # randomly shift images vertically
         height_shift_range=0.1,
-        # set range for random shear
         shear_range=0.2,
-        # set range for random zoom
         zoom_range=0.3,
         horizontal_flip = True,
-        # set range for random channel shifts
-        # set mode for filling points outside the input boundaries
         fill_mode='nearest',
-        # value used for fill_mode = "constant"
         cval=0.,
 )
 
@@ -325,13 +291,6 @@ for ii in range(100):
 
     X_train3_2, y_train3_2 = datagen.flow(X_train3,y_train3, batch_size=50000, shuffle=True)[0]
     X_train2_2, y_train2_2 = datagen.flow(X_train2,y_train2, batch_size=50000, shuffle=True)[0]
-    
-    # ranNeg = np.random.randint(2, size=(50000,1,1,1)).astype('float32')
-    # X_train2_2 = np.abs(np.tile(ranNeg,[1,32,32,1])-X_train2_2)
-
-    # print(len(X_train3_2))
-    # X_train3_2 = X_train3_2.reshape(X_train2.shape[0], 784)
-    # X_train2_2 = X_train2_2.reshape(X_train2.shape[0], 784)
     idx1 = list(range(X_train3_2.shape[0]))
     idx2 = list(range(X_train3_2.shape[0]))
     random.shuffle(idx1)
@@ -347,8 +306,8 @@ for ii in range(100):
     
     if output[0]<best:
         best = output[0]
-        model.save_weights('WatermarkingNet_Conv_CIFAR_best_New_V1_12.h5')
+        model.save_weights('Best_Weights.h5')
    
               
               
-    model.save_weights('WatermarkingNet_CIFAR_Conv_New_V1_12.h5')
+    model.save_weights('Current_Weights.h5')

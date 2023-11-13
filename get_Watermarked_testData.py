@@ -30,15 +30,11 @@ nb_classes = 10
 epochs = 200
 data_augmentation = False
 PartialRate = 1.
-# input image dimensions
 img_rows, img_cols = 32, 32
-# The CIFAR10 images are RGB.
 img_channels = 1
 
-# The data, shuffled and split between train and test sets:
 
 (X_train2, y_train2), (X_test2, y_test2) = fashion_mnist.load_data()
-# X_test2 = X_test2.reshape(X_test2.shape[0], 784)
 X_train2 = X_train2.astype('float32')
 X_test2 = X_test2.astype('float32')
 X_train2 /= 255.
@@ -49,7 +45,6 @@ X_train2 -= x_train_mean1
 X_test2 -= x_train_mean1
 
 (X_train3, _), (X_test3, y_test3) = cifar10.load_data()
-# X_test3 = X_test3.reshape(X_test2.shape[0], 784)
 X_train3 = X_train3.astype('float32')
 X_test3 = X_test3.astype('float32')
 X_train3 /= 255.
@@ -306,14 +301,6 @@ output = model.predict([X_test3,X_train2],batch_size=batch_size)
 
 
 output=output[0]
-
-# output2 = output-X_test3
-
-# Scale = 1.
-
-# output = output + (Scale- 1.)*output2
-# output2 = Scale*output2 
-
 
 
 output=(output+x_train_mean2)*255
