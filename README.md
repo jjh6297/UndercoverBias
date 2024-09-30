@@ -51,7 +51,7 @@ python Evaluate_ResNet18.py
 ## Citation
 
 ```
-@inproceedings{jang2024Rethinking,
+@inproceedings{jang2024rethinking,
   title={Rethinking Data Bias: Dataset Copyright Protection via Embedding Class-wise Hidden Bias},
   author={Jang, Jinhyeok and Han, ByungOk and Kim, Jaehong and and Youn, Chan-Hyun},
   booktitle={European Conference on Computer Vision (ECCV)},
